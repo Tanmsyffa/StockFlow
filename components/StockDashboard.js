@@ -184,7 +184,6 @@ export default function StockDashboard() {
           <p className="text-gray-600">Ringkasan stok dan inventaris menu</p>
         </div>
 
-        {session?.user?.role === "admin" && (
           <button
             onClick={handleAddStock}
             className="flex items-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-indigo-800 transition shadow-sm"
@@ -192,7 +191,6 @@ export default function StockDashboard() {
             <PlusIcon className="h-5 w-5 mr-1" />
             Tambah Menu
           </button>
-        )}
       </div>
 
       {/* Stats Cards */}
