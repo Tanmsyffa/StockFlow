@@ -32,7 +32,7 @@ export default async function handler(req, res) {
             .json({ message: "Quantity harus angka lebih dari 0" });
         }
 
-        const stock = await Stock.findOne({ kode_barang });
+        const stock = await Stock.findOne({ kode_barang }).exec();
         if (!stock) {
           return res
             .status(404)
