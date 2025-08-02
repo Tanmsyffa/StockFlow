@@ -178,7 +178,6 @@ export default function StockForm({ stock, onSubmit, onCancel }) {
             <option value="Makanan">Makanan</option>
             <option value="Minuman">Minuman</option>
             <option value="Snack">Snack</option>
-            <option value="Bahan Baku">Bahan Baku</option>
             <option value="Lainnya">Lainnya</option>
           </select>
         </div>
