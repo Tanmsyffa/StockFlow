@@ -28,17 +28,13 @@ export default function StockDashboard() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(
-          data.message || `HTTP error! status: ${response.status}`
-        );
+        throw new Error(data.message || `HTTP error! status: ${response.status}`);
       }
 
       setStocks(data);
 
       const totalItems = data.length;
-      const lowStock = data.filter(
-        (item) => item.stock_akhir < 10 && item.stock_akhir > 0
-      ).length;
+      const lowStock = data.filter((item) => item.stock_akhir < 10 && item.stock_akhir > 0).length;
       const outOfStock = data.filter((item) => item.stock_akhir <= 0).length;
       const totalValue = data.reduce(
         (sum, item) => sum + item.stock_akhir * item.modal,
@@ -70,9 +66,7 @@ export default function StockDashboard() {
 
   const handleFormSubmit = async (formData) => {
     try {
-      const url = editingStock
-        ? `/api/stock/${editingStock._id}`
-        : "/api/stock";
+      const url = editingStock ? `/api/stock/${editingStock._id}` : "/api/stock";
       const method = editingStock ? "PUT" : "POST";
 
       const dataToSend = {
@@ -93,10 +87,8 @@ export default function StockDashboard() {
       }
 
       const response = await fetch(url, {
-        method: method,
-        headers: {
-          "Content-Type": "application/json",
-        },
+        method,
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataToSend),
       });
 
@@ -117,13 +109,10 @@ export default function StockDashboard() {
   };
 
   const handleDeleteStock = async (id) => {
-    const confirmDelete = window.confirm("Hapus data stok ini?");
-    if (!confirmDelete) return;
+    if (!window.confirm("Hapus data stok ini?")) return;
 
     try {
-      const response = await fetch(`/api/stock/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(`/api/stock/${id}`, { method: "DELETE" });
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -140,13 +129,11 @@ export default function StockDashboard() {
 
   if (loading) {
     return (
-      <div className="space-y-6">
-        <div className="animate-pulse">
-          <div className="h-8 bg-gray-300 rounded w-1/4 mb-4">
-          
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            {[1, 2, 3, 4].map((i) => (
+      <div className="p-4 space-y-6">
+        <div className="animate-pulse space-y-4">
+          <div className="h-8 bg-gray-300 rounded w-1/3"></div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[...Array(4)].map((_, i) => (
               <div key={i} className="h-24 bg-gray-300 rounded"></div>
             ))}
           </div>
@@ -156,18 +143,17 @@ export default function StockDashboard() {
     );
   }
 
-  // Error state
   if (error) {
     return (
-      <div className="space-y-6">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+      <div className="p-4 space-y-6">
+        <div className="bg-red-100 border border-red-200 p-4 rounded-lg">
           <h3 className="text-red-800 font-semibold">Error Loading Data</h3>
           <p className="text-red-600 mt-2">{error}</p>
           <button
             onClick={fetchStocks}
             className="mt-3 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
           >
-            Retry
+            Coba Lagi
           </button>
         </div>
       </div>
@@ -175,58 +161,31 @@ export default function StockDashboard() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
+    <div className="p-4 space-y-6">
+      <div className="flex flex-wrap justify-between items-center gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800">
-            Dashboard Stok Menu
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-800">Dashboard Stok Menu</h2>
           <p className="text-gray-600">Ringkasan stok dan inventaris menu</p>
         </div>
-
-          <button
-            onClick={handleAddStock}
-            className="flex items-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-indigo-800 transition shadow-sm"
-          >
-            <PlusIcon className="h-5 w-5 mr-1" />
-            Tambah Menu
-          </button>
+        <button
+          onClick={handleAddStock}
+          className="flex items-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-indigo-800 transition shadow-sm"
+        >
+          <PlusIcon className="h-5 w-5 mr-2" />
+          Tambah Menu
+        </button>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <DashboardCard
-          title="Total Menu"
-          value={stats.totalItems}
-          icon={ChartBarIcon}
-          color="blue"
-        />
-        <DashboardCard
-          title="Stok Rendah"
-          value={stats.lowStock}
-          icon={ChartBarIcon}
-          color="yellow"
-        />
-        <DashboardCard
-          title="Stok Habis"
-          value={stats.outOfStock}
-          icon={ChartBarIcon}
-          color="red"
-        />
-        <DashboardCard
-          title="Total Nilai Stok"
-          value={`Rp${stats.totalValue.toLocaleString()}`}
-          icon={ChartBarIcon}
-          color="green"
-        />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <DashboardCard title="Total Menu" value={stats.totalItems} icon={ChartBarIcon} color="blue" />
+        <DashboardCard title="Stok Rendah" value={stats.lowStock} icon={ChartBarIcon} color="yellow" />
+        <DashboardCard title="Stok Habis" value={stats.outOfStock} icon={ChartBarIcon} color="red" />
+        <DashboardCard title="Total Nilai Stok" value={`Rp${stats.totalValue.toLocaleString()}`} icon={ChartBarIcon} color="green" />
       </div>
 
-      {/* Stock Table */}
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
-          <h3 className="text-lg font-medium text-gray-800">
-            Daftar Stok Menu
-          </h3>
+          <h3 className="text-lg font-medium text-gray-800">Daftar Stok Menu</h3>
         </div>
         <StockTable
           stocks={stocks}
@@ -237,9 +196,8 @@ export default function StockDashboard() {
         />
       </div>
 
-      {/* Stock Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-gray-500/40 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 bg-gray bg-opacity-40 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <h3 className="text-xl font-bold text-gray-800 mb-4">

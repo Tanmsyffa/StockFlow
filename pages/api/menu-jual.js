@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     try {
-      const { kode_barang, nama_menu, qty_jual } = req.body;
+      const { tanggal, kode_barang, nama_menu, qty_jual } = req.body;
 
       if (!kode_barang || !nama_menu || qty_jual === undefined || qty_jual === null) {
         return res.status(400).json({ message: "Data tidak lengkap" });
@@ -45,7 +45,7 @@ export default async function handler(req, res) {
         harga_satuan: hargaJual,
         total_harga: totalHarga,
         keuntungan: totalKeuntungan,
-        tanggal: new Date(),
+        tanggal: new Date(tanggal),
       });
 
       await newMenuJual.save();
