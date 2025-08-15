@@ -17,14 +17,6 @@ export default function Header({ user, toggleSidebar }) {
           </div>
 
           <div className="flex items-center space-x-4">
-            <button
-              type="button"
-              className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none"
-            >
-              <span className="sr-only">View notifications</span>
-              <BellIcon className="h-6 w-6" aria-hidden="true" />
-            </button>
-
             <div className="flex items-center">
               <div className="text-right mr-3 hidden md:block">
                 <p className="text-sm font-medium text-gray-700">{user.name}</p>

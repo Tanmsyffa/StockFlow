@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { PlusIcon, TrashIcon, ChartBarIcon, CalendarIcon } from "@heroicons/react/outline";
+import { PlusIcon, TrashIcon, ChartBarIcon, CalendarIcon, DocumentIcon, DocumentTextIcon, CurrencyDollarIcon } from "@heroicons/react/outline";
 
 export default function MenuJual() {
   const [transactions, setTransactions] = useState([]);
@@ -96,7 +96,7 @@ export default function MenuJual() {
             onClick={() => setShowReports(true)}
             className="flex items-center bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition shadow-sm"
           >
-            <ChartBarIcon className="h-5 w-5 mr-1" />
+            <DocumentTextIcon className="h-5 w-5 mr-1" />
             <span className="whitespace-nowrap">Laporan Penjualan</span>
           </button>
           <button
@@ -424,7 +424,7 @@ function SalesReports({ transactions, stocks }) {
         <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
           <div className="flex items-center">
             <div className="p-2 bg-blue-100 rounded-lg">
-              <ChartBarIcon className="h-6 w-6 text-blue-600" />
+              <CurrencyDollarIcon className="h-6 w-6 text-blue-600" />
             </div>
             <div className="ml-4">
               <h4 className="text-sm font-medium text-blue-600">Total Pendapatan</h4>

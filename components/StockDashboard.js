@@ -3,7 +3,7 @@ import DashboardCard from "./DashboardCard";
 import StockTable from "./StockTable";
 import StockForm from "./StockForm";
 import { useSession } from "next-auth/react";
-import { ChartBarIcon, PlusIcon } from "@heroicons/react/outline";
+import { ArchiveIcon, ClipboardListIcon, CurrencyDollarIcon, PlusIcon } from "@heroicons/react/outline";
 
 export default function StockDashboard() {
   const { data: session } = useSession();
@@ -177,10 +177,10 @@ export default function StockDashboard() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <DashboardCard title="Total Menu" value={stats.totalItems} icon={ChartBarIcon} color="blue" />
-        <DashboardCard title="Stok Rendah" value={stats.lowStock} icon={ChartBarIcon} color="yellow" />
-        <DashboardCard title="Stok Habis" value={stats.outOfStock} icon={ChartBarIcon} color="red" />
-        <DashboardCard title="Total Nilai Stok" value={`Rp${stats.totalValue.toLocaleString()}`} icon={ChartBarIcon} color="green" />
+        <DashboardCard title="Total Menu" value={stats.totalItems} icon={ClipboardListIcon} color="blue" />
+        <DashboardCard title="Stok Rendah" value={stats.lowStock} icon={ArchiveIcon} color="yellow" />
+        <DashboardCard title="Stok Habis" value={stats.outOfStock} icon={ArchiveIcon} color="red" />
+        <DashboardCard title="Total Nilai Stok" value={`Rp${stats.totalValue.toLocaleString()}`} icon={CurrencyDollarIcon} color="green" />
       </div>
 
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
